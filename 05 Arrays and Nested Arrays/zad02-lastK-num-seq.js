@@ -13,6 +13,6 @@ function lastKNumSeq(num1, num2) {
             result.push(sum);
         }
     }
-    console.log(result);
+    return result;
 }
 lastKNumSeq(8, 2);

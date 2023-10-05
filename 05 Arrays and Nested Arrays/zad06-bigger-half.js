@@ -6,6 +6,6 @@ function biggerHalf(arr) {
     for (let i = length; i < arr.length; i++) {
         newArr.push(arr[i]);
     }
-    console.log(newArr);
+    return newArr;
 }
 biggerHalf([4, 7, 2, 5]);
