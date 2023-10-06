@@ -10,7 +10,6 @@ function townPopulation(arr) {
         }
     }
     let keys = Object.keys(obj)
-    keys
     for (const key of keys) {
         console.log(`${key} : ${obj[key]}`);
     }
