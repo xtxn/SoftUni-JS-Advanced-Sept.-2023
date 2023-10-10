@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FromJSONToHTMLTable</title>
+    <style>
+        table,th{
+            border: groove;
+            border-collapse: collapse;
+        }
+        td{
+            border: 1px solid black;
+        }
+        td,th{
+            padding: 5px;
+        }
+    </style>
+</head>zad06-form-json-to-html
+<body>
+    <div id="wrapper">
+    </div>
+    <script>
+        function fromJSONToHTMLTable(input){
+            let students = JSON.parse(input);
+
+            // Initialize the HTML string for the table
+            let tableHTML = '<table>\n';
+
+            tableHTML += '   <tr>'
+
+            // Create the table header row
+            for (const key in students[0]) {
+                if (students[0].hasOwnProperty(key)) {
+                tableHTML += `<th>${escapeHTML(key)}</th>`
+                }
+            }
+            tableHTML += '</tr>\n'
+
+            // Create table rows for each student
+            students.forEach(student => {
+                tableHTML += '   <tr>';
+                for (const key in student) {
+                    if (student.hasOwnProperty(key)) {
+                     tableHTML += `<td>${escapeHTML(student[key])}</td>`;
+                    }
+                }
+                tableHTML += '</tr>\n';
+            });
+
+            // Close the table
+            tableHTML += '</table>';
+         
+            function escapeHTML(text) {
+                const escapeChars = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                 '>': '&gt;',
+                  '"': '&quot;',
+                  "'": '&#x27;',
+                  '`': '&#x60;',
+               };
+               return text.toString().replace(/[&<>"'`]/g, char => escapeChars[char]);
+            }
+            return tableHTML;
+
+        }
+        window.onload = function(){
+            let container = document.getElementById('wrapper');
+            container.innerHTML = fromJSONToHTMLTable(['[{"Name":"Stamat","Price":5.5},{"Name":"Rumen","Price":6}]']);
+        };
+    </script>
+</body>
+</html>
